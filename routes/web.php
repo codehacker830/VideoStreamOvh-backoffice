@@ -18,6 +18,9 @@ Route::get('/', function () {
 });
 // Route::view('/{path?}', 'welcome');
 
+Route::post('upload-advanced', 'UploadController@upload');
+
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+
