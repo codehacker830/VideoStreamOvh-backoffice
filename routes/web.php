@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::view('/{path?}', 'welcome');
-// Auth::routes();
+Route::get('/', function () {
+    return view('welcome');
+});
+// Route::view('/{path?}', 'welcome');
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes(['verify' => true]);
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');

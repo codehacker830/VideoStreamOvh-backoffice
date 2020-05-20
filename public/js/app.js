@@ -72189,7 +72189,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  */
 
 
-__webpack_require__(/*! ./src/index */ "./resources/js/src/index.js");
+__webpack_require__(/*! ./src/index.jsx */ "./resources/js/src/index.jsx");
 
 /***/ }),
 
@@ -73655,10 +73655,10 @@ var Dashboard = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./resources/js/src/index.js":
-/*!***********************************!*\
-  !*** ./resources/js/src/index.js ***!
-  \***********************************/
+/***/ "./resources/js/src/index.jsx":
+/*!************************************!*\
+  !*** ./resources/js/src/index.jsx ***!
+  \************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -73947,15 +73947,27 @@ var Register = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./resources/sass/custom.scss":
+/*!************************************!*\
+  !*** ./resources/sass/custom.scss ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!******************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/custom.scss ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! D:\0_OnGoingProject\Netflex\0_Backend\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\0_OnGoingProject\Netflex\0_Backend\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\0_OnGoingProject\Netflex\0_Backend\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\0_OnGoingProject\Netflex\0_Backend\resources\sass\custom.scss */"./resources/sass/custom.scss");
 
 
 /***/ })

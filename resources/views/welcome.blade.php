@@ -14,7 +14,6 @@
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
-    <link href="css/osahan.css" rel="stylesheet">
     <!-- Owl Carousel -->
     <link rel="stylesheet" href="vendor/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" href="vendor/owl-carousel/owl.theme.css">
@@ -23,6 +22,10 @@
     <!-- Fonts -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"> -->
     <link rel="stylesheet" href="css/app.css">
+
+    <!-- UI style -->
+    <link rel="stylesheet" href="css/osahan.css">
+    <link rel="stylesheet" href="css/custom.css">
 </head>
 
 <body id="page-top">
