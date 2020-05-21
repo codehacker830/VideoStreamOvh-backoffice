@@ -74025,10 +74025,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
                 break;
               }
 
-              chunk = _this.file.slice(i * size, Math.min(i * size + size, _this.file.size), _this.file.type); // this.state.chunks.push(this.state.file.slice(
-              //     i * size, Math.min(i * size + size, this.state.file.size), this.state.file.type
-              // ));
-
+              chunk = _this.file.slice(i * size, Math.min(i * size + size, _this.file.size), _this.file.type);
               formData = new FormData();
               formData.set('is_last', i === chunks - 1);
               formData.set('file', chunk, "".concat(_this.file.name, ".part"));
@@ -74058,8 +74055,15 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
             'Content-Type': 'application/octet-stream'
           },
           onUploadProgress: function onUploadProgress(event) {
+            console.log('event: ', event);
             console.log('event.loaded: ', event.loaded);
             _this.uploaded += event.loaded;
+
+            _this.setState({
+              progress: _this.uploaded / _this.file.size
+            });
+
+            console.log(_this.uploaded / _this.file.size);
           }
         };
         axios__WEBPACK_IMPORTED_MODULE_2___default()(config).then(function (response) {
@@ -74071,10 +74075,9 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
     });
 
     _this.file = null;
+    _this.uploaded = 0;
     _this.state = {
-      // file: null,
-      // chunks: [],
-      uploaded: 0
+      progress: 0
     };
     return _this;
   }
@@ -74122,7 +74125,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
         type: "file",
         onChange: this.select
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("progress", {
-        value: this.progress
+        value: this.state.progress
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
         className: "nav-item dropdown no-arrow mx-1"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {

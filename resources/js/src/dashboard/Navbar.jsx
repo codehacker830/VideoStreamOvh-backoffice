@@ -5,26 +5,11 @@ class Navbar extends React.Component {
     constructor(props) {
         super(props);
         this.file = null;
+        this.uploaded = 0;
         this.state = {
-            // file: null,
-            // chunks: [],
-            uploaded: 0
+            progress: 0
         };
     };
-
-    // componentDidUpdate(prevProps, prevState) {
-    //     console.log('pokemons state has changed.')
-    //     if (prevState.chunks !== this.state.chunks) {
-    //         console.log('pokemons state has changed.')
-    //     }
-    // }
-
-    // formData = () => {
-    //     let formData = new FormData;
-    //     formData.set('is_last', this.state.chunks.length === 1);
-    //     formData.set('file', this.state.chunks[0], `${this.state.file.name}.part`);
-    //     return formData;
-    // }
 
     select = (event) => {
         this.file = event.target.files.item(0);
@@ -38,9 +23,7 @@ class Navbar extends React.Component {
             const chunk = this.file.slice(
                 i * size, Math.min(i * size + size, this.file.size), this.file.type
             );
-            // this.state.chunks.push(this.state.file.slice(
-            //     i * size, Math.min(i * size + size, this.state.file.size), this.state.file.type
-            // ));
+
             let formData = new FormData;
             formData.set('is_last', i === chunks - 1);
             formData.set('file', chunk, `${this.file.name}.part`);
@@ -59,8 +42,11 @@ class Navbar extends React.Component {
                     'Content-Type': 'application/octet-stream'
                 },
                 onUploadProgress: event => {
+                    console.log('event: ', event);
                     console.log('event.loaded: ', event.loaded);
                     this.uploaded += event.loaded;
+                    this.setState({ progress: this.uploaded / this.file.size });
+                    console.log(this.uploaded / this.file.size);
                 }
             };
             Axios(config).then(response => {
@@ -96,10 +82,10 @@ class Navbar extends React.Component {
                 <ul className="navbar-nav ml-auto ml-md-0 osahan-right-navbar">
                     <li className="nav-item mx-1">
                         <a className="nav-link" href="">
-                            {/* <i className="fas fa-plus-circle fa-fw"></i> */}
-                            {/* Upload Video */}
+                            {/* <i className="fas fa-plus-circle fa-fw"></i>
+                            Upload Video */}
                             <input type="file" onChange={this.select} />
-                            <progress value={this.progress}></progress>
+                            <progress value={this.state.progress}></progress>
                         </a>
                     </li>
                     <li className="nav-item dropdown no-arrow mx-1">
