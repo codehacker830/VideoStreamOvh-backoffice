@@ -13,12 +13,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/upload', 'UploadController@upload');
 // Route::view('/{path?}', 'welcome');
 
-Route::post('upload-advanced', 'UploadController@upload');
+Route::get('upload-advanced', 'UploadController@upload');
 
 Auth::routes(['verify' => true]);
 
