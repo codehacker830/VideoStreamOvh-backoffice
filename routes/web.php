@@ -13,12 +13,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/upload', 'UploadController@upload');
-// Route::view('/{path?}', 'welcome');
-
-Route::get('upload-advanced', 'UploadController@upload');
-
-Auth::routes(['verify' => true]);
-
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
-
+Route::view('/{path?}', 'welcome');
+//
+//Route::get('upload-advanced', 'UploadController@upload');
+//
+//Auth::routes(['verify' => true]);
+//
+//Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');

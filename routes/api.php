@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
 
-Route::group(['middleware' => ['jwt.verify']], function() {
+Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('user', 'UserController@getAuthenticatedUser');
-
 });
 
+Route::post('upload', 'UploadController@upload');
