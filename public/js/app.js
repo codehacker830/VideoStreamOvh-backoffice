@@ -74020,19 +74020,18 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
           switch (_context2.prev = _context2.next) {
             case 0:
               size = 5 * 1024 * 1024, chunks = Math.ceil(_this.file.size / size);
-              console.log('this.state.file.size: ', _this.file.size);
-              _this.chunks = new Array(chunks).fill(0).map(function (el, i) {
-                var chunk = _this.file.slice(i * size, Math.min(i * size + size, _this.file.size), _this.file.type);
-
-                return chunk;
-              });
               _loop = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _loop(i) {
+                var chunk, formData;
                 return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _loop$(_context) {
                   while (1) {
                     switch (_context.prev = _context.next) {
                       case 0:
-                        _context.next = 2;
-                        return _this.upload().then(function () {
+                        chunk = _this.file.slice(i * size, Math.min(i * size + size, _this.file.size), _this.file.type);
+                        formData = new FormData();
+                        formData.set('is_last', i + 1 == chunks);
+                        formData.set('file', chunk, "".concat(_this.file.name, ".part"));
+                        _context.next = 6;
+                        return _this.upload(formData).then(function () {
                           _this.setState({
                             progress: (i + 1) / chunks
                           });
@@ -74040,7 +74039,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
                           console.error(err);
                         });
 
-                      case 2:
+                      case 6:
                       case "end":
                         return _context.stop();
                     }
@@ -74049,20 +74048,20 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
               });
               i = 0;
 
-            case 5:
+            case 3:
               if (!(i < chunks)) {
-                _context2.next = 10;
+                _context2.next = 8;
                 break;
               }
 
-              return _context2.delegateYield(_loop(i), "t0", 7);
+              return _context2.delegateYield(_loop(i), "t0", 5);
 
-            case 7:
+            case 5:
               i++;
-              _context2.next = 5;
+              _context2.next = 3;
               break;
 
-            case 10:
+            case 8:
             case "end":
               return _context2.stop();
           }
@@ -74070,11 +74069,11 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
       }, _callee);
     })));
 
-    _defineProperty(_assertThisInitialized(_this), "upload", function () {
+    _defineProperty(_assertThisInitialized(_this), "upload", function (formData) {
       return new Promise(function (resolve, reject) {
         var config = {
           method: 'POST',
-          data: _this.formData(),
+          data: formData,
           url: 'api/upload',
           headers: {
             'Content-Type': 'application/octet-stream'
@@ -74082,8 +74081,6 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
           onUploadProgress: function onUploadProgress(event) {}
         };
         axios__WEBPACK_IMPORTED_MODULE_2___default()(config).then(function (response) {
-          _this.chunks.shift();
-
           resolve(response);
         })["catch"](function (error) {
           reject(error);
@@ -74101,14 +74098,6 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Navbar, [{
-    key: "formData",
-    value: function formData() {
-      var formData = new FormData();
-      formData.set('is_last', this.chunks.length === 1);
-      formData.set('file', this.chunks[0], "".concat(this.file.name, ".part"));
-      return formData;
-    }
-  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {

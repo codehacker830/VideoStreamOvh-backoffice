@@ -17,7 +17,10 @@ class UploadController extends Controller
 
         if ($request->has('is_last') && $request->boolean('is_last')) {
             $name = basename($path, '.part');
-            File::move($path, Storage::disk('local')->path("chunks/{$name}"));
+            $finalPath = Storage::disk('local')->path("chunks/{$name}");
+            File::move($path, $finalPath);
+            $test = $this->getThumbnail($finalPath);
+            return response()->json(['status' => $test]);
         }
 
         return response()->json(['uploaded' => true]);

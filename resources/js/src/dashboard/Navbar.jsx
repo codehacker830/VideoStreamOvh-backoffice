@@ -20,27 +20,18 @@ class Navbar extends React.Component {
         }
     }
 
-    formData() {
-        let formData = new FormData;
-
-        formData.set('is_last', this.chunks.length === 1);
-        formData.set('file', this.chunks[0], `${this.file.name}.part`);
-
-        return formData;
-    }
-
     createChunks = async () => {
         let size = 5 * 1024 * 1024, chunks = Math.ceil(this.file.size / size);
-        console.log('this.state.file.size: ', this.file.size);
-        this.chunks = new Array(chunks).fill(0).map((el, i) => {
+
+        for (let i = 0; i < chunks; i++) {
             const chunk = this.file.slice(
                 i * size, Math.min(i * size + size, this.file.size), this.file.type
             );
-            return chunk;
-        });
+            let formData = new FormData;
+            formData.set('is_last', i + 1 == chunks);
+            formData.set('file', chunk, `${this.file.name}.part`);
 
-        for (let i = 0; i < chunks; i++) {
-            await this.upload().then(() => {
+            await this.upload(formData).then(() => {
                 this.setState({ progress: (i + 1) / chunks });
             }).catch(err => {
                 console.error(err);
@@ -48,11 +39,11 @@ class Navbar extends React.Component {
         }
     }
 
-    upload = () => {
+    upload = (formData) => {
         return new Promise((resolve, reject) => {
             const config = {
                 method: 'POST',
-                data: this.formData(),
+                data: formData,
                 url: 'api/upload',
                 headers: {
                     'Content-Type': 'application/octet-stream'
@@ -61,7 +52,6 @@ class Navbar extends React.Component {
                 }
             };
             Axios(config).then(response => {
-                this.chunks.shift();
                 resolve(response);
             }).catch(error => {
                 reject(error)
