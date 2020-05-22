@@ -6,6 +6,7 @@ class Navbar extends React.Component {
         super(props);
         this.file = null;
         this.uploaded = 0;
+        this.chunks = [];
         this.state = {
             progress: 0
         };
@@ -19,42 +20,48 @@ class Navbar extends React.Component {
         }
     }
 
+    formData() {
+        let formData = new FormData;
+
+        formData.set('is_last', this.chunks.length === 1);
+        formData.set('file', this.chunks[0], `${this.file.name}.part`);
+
+        return formData;
+    }
+
     createChunks = async () => {
         let size = 5 * 1024 * 1024, chunks = Math.ceil(this.file.size / size);
         console.log('this.state.file.size: ', this.file.size);
-        for (let i = 0; i < chunks; i++) {
+        this.chunks = new Array(chunks).fill(0).map((el, i) => {
             const chunk = this.file.slice(
                 i * size, Math.min(i * size + size, this.file.size), this.file.type
             );
+            return chunk;
+        });
 
-            let formData = new FormData;
-            formData.set('is_last', i === chunks - 1);
-            formData.set('file', chunk, `${this.file.name}.part`);
-
-            await this.upload(formData).then(() => {
-                // this.setState({ progress: (i + 1) / chunks });
+        for (let i = 0; i < chunks; i++) {
+            await this.upload().then(() => {
+                this.setState({ progress: (i + 1) / chunks });
+            }).catch(err => {
+                console.error(err);
             });
         }
     }
 
-    upload = (formData) => {
+    upload = () => {
         return new Promise((resolve, reject) => {
             const config = {
                 method: 'POST',
-                data: formData,
+                data: this.formData(),
                 url: 'api/upload',
                 headers: {
                     'Content-Type': 'application/octet-stream'
                 },
                 onUploadProgress: event => {
-                    // console.log('event: ', event);
-                    console.log('event.loaded: ', event.loaded);
-                    this.uploaded += event.loaded;
-                    this.setState({ progress: this.uploaded / this.file.size });
-                    // console.log(this.uploaded / this.file.size);
                 }
             };
             Axios(config).then(response => {
+                this.chunks.shift();
                 resolve(response);
             }).catch(error => {
                 reject(error)
