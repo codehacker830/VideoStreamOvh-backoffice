@@ -12,8 +12,11 @@ class Navbar extends React.Component {
     };
 
     select = (event) => {
+        this.uploaded = 0;
         this.file = event.target.files.item(0);
-        this.createChunks();
+        if (this.file !== null) {
+            this.createChunks();
+        }
     }
 
     createChunks = async () => {
@@ -29,7 +32,7 @@ class Navbar extends React.Component {
             formData.set('file', chunk, `${this.file.name}.part`);
 
             await this.upload(formData).then(() => {
-                this.setState({ progress: (i + 1) / chunks });
+                // this.setState({ progress: (i + 1) / chunks });
             });
         }
     }
@@ -45,9 +48,9 @@ class Navbar extends React.Component {
                 },
                 onUploadProgress: event => {
                     // console.log('event: ', event);
-                    // console.log('event.loaded: ', event.loaded);
-                    // this.uploaded += event.loaded;
-                    // this.setState({ progress: this.uploaded / this.file.size });
+                    console.log('event.loaded: ', event.loaded);
+                    this.uploaded += event.loaded;
+                    this.setState({ progress: this.uploaded / this.file.size });
                     // console.log(this.uploaded / this.file.size);
                 }
             };

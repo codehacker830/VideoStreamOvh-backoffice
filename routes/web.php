@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+// phpinfo();
 Route::view('/{path?}', 'welcome');
 //
 //Route::get('upload-advanced', 'UploadController@upload');

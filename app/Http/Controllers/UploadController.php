@@ -20,11 +20,72 @@ class UploadController extends Controller
 
         if ($request->has('is_last') && $request->boolean('is_last')) {
             $name = basename($realpath, '.part');
-
             File::move($path, Storage::disk('local')->path("chunks/$name"));
-            File::delete($realpath);
         }
 
+        // =====================================================================
+
+        // $file = $request->file('file');
+
+        // $path = Storage::disk('local')->path("chunks/{$file->getClientOriginalName()}");
+
+        // File::append($path, $file->get());
+
+        // if ($request->has('is_last') && $request->boolean('is_last')) {
+        //     $name = basename($path, '.part');
+        //     File::move($path, Storage::disk('local')->path("chunks/{$name}"));
+        // }
+        // =====================================================================
+        // $file = $request->file('file');
+        // $oldFileName = $file->getClientOriginalName();
+        // $realpath = Storage::disk('local')->path("chunks\\" . $oldFileName);
+
+        // File::append('upload.test', $file->get());
+
+        // if ($request->has('is_last') && $request->boolean('is_last')) {
+        //     $name = basename($realpath, '.part');
+        //     $newFileName = Storage::disk('local')->path("chunks/$name");
+        //     File::move('upload.test', $newFileName);
+        //     File::delete('upload.test');
+        // }
+        // =====================================================================
+        // $file = $request->file('file');
+        // $oldFileName = $file->getClientOriginalName();
+        // $realpath = Storage::disk('local')->path("chunks\\" . $oldFileName);
+        // $path = Storage::disk('local')->put("chunks\\" . $oldFileName, 'Contents');
+
+        // File::append("chunks\\" . $oldFileName, $file->get());
+
+        // if ($request->has('is_last') && $request->boolean('is_last')) {
+        //     $name = basename($realpath, '.part');
+        //     $newFileName = Storage::disk('local')->path("chunks/$name");
+        //     File::move($path, $newFileName);
+        //     File::delete($realpath);
+        // }
+
         return response()->json(['uploaded' => true]);
+    }
+
+    function getThumbnail($video_file_path)
+    {
+        $thumbnail_path = 'test/';
+        $second             = 10;
+        $ffmpeg_installation_path = 'ffmpeg';
+        $thumbExt = 'png';
+
+        $info = pathinfo($video_file_path);
+        $videoname =  basename($video_file_path, '.' . $info['extension']);
+        $thumbnail_path = str_replace($videoname . "." . $info['extension'], "", $video_file_path);
+        $thumbnail_path .= 'thumb/';
+
+        $cmd = "{$ffmpeg_installation_path} -i {$video_file_path} -ss {$second} -vframes 1 {$thumbnail_path}{$videoname}.{$thumbExt}";
+        exec($cmd, $output, $retval);
+
+        if ($retval) {
+            return 'error generated!';
+        } else {
+            $thumb_path = $thumbnail_path . $videoname . ".{$thumbExt}";
+            return 'Thumbnail generated successfully. ' . $thumb_path;
+        }
     }
 }
