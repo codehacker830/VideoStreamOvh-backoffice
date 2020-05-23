@@ -26,7 +26,7 @@ Route::post('password/reset', 'ForgotPasswordController@reset');
 //     return $request->user();
 // });
 
-Route::group(['middleware' => ['jwt.verify']], function() {
+Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('user', 'AuthController@getAuthenticatedUser');
     Route::post('email/resend', 'VerificationController@resend');
     Route::get('email/verify/{id}/{hash}', 'VerificationController@verify');
@@ -50,6 +50,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('videos/category/{category_id}', 'VideoController@getVideosByCategory');
     Route::get('videos/title/{title}', 'VideoController@getVideosByName');
     Route::post('video/upload', 'VideoController@upload');
-//    Route::put('video/{video_id}', 'VideoController@update');
-});
+    Route::put('video/{video_id}', 'VideoController@update');
 
+//    Route::post('upload', 'UploadController@upload');
+});
