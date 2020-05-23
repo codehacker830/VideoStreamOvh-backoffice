@@ -22,6 +22,7 @@ Route::get('logout', 'AuthController@logout');
 Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail');
 Route::post('password/reset', 'ForgotPasswordController@reset');
 
+Route::post('video/upload', 'VideoController@upload');
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
