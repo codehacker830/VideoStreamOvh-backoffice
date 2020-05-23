@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+// phpinfo();
+// Route::view('/{path?}', 'welcome');
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -24,7 +27,6 @@ use Illuminate\Support\Facades\Auth;
  Route::get('/{path?}', function($path) {
      return view('welcome');
  })->where('path', '.*');
-//Route::view('/{path?}', 'welcome');
 //
 //Route::get('upload-advanced', 'UploadController@upload');
 //
