@@ -74004,9 +74004,12 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "select", function (event) {
+      _this.uploaded = 0;
       _this.file = event.target.files.item(0);
 
-      _this.createChunks();
+      if (_this.file !== null) {
+        _this.createChunks();
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "createChunks", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -74017,7 +74020,6 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
           switch (_context2.prev = _context2.next) {
             case 0:
               size = 5 * 1024 * 1024, chunks = Math.ceil(_this.file.size / size);
-              console.log('this.state.file.size: ', _this.file.size);
               _loop = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _loop(i) {
                 var chunk, formData;
                 return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _loop$(_context) {
@@ -74026,13 +74028,15 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
                       case 0:
                         chunk = _this.file.slice(i * size, Math.min(i * size + size, _this.file.size), _this.file.type);
                         formData = new FormData();
-                        formData.set('is_last', i === chunks - 1);
+                        formData.set('is_last', i + 1 == chunks);
                         formData.set('file', chunk, "".concat(_this.file.name, ".part"));
                         _context.next = 6;
                         return _this.upload(formData).then(function () {
                           _this.setState({
                             progress: (i + 1) / chunks
                           });
+                        })["catch"](function (err) {
+                          console.error(err);
                         });
 
                       case 6:
@@ -74044,20 +74048,20 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
               });
               i = 0;
 
-            case 4:
+            case 3:
               if (!(i < chunks)) {
-                _context2.next = 9;
+                _context2.next = 8;
                 break;
               }
 
-              return _context2.delegateYield(_loop(i), "t0", 6);
+              return _context2.delegateYield(_loop(i), "t0", 5);
 
-            case 6:
+            case 5:
               i++;
-              _context2.next = 4;
+              _context2.next = 3;
               break;
 
-            case 9:
+            case 8:
             case "end":
               return _context2.stop();
           }
@@ -74074,12 +74078,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
           headers: {
             'Content-Type': 'application/octet-stream'
           },
-          onUploadProgress: function onUploadProgress(event) {// console.log('event: ', event);
-            // console.log('event.loaded: ', event.loaded);
-            // this.uploaded += event.loaded;
-            // this.setState({ progress: this.uploaded / this.file.size });
-            // console.log(this.uploaded / this.file.size);
-          }
+          onUploadProgress: function onUploadProgress(event) {}
         };
         axios__WEBPACK_IMPORTED_MODULE_2___default()(config).then(function (response) {
           resolve(response);
@@ -74091,6 +74090,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
 
     _this.file = null;
     _this.uploaded = 0;
+    _this.chunks = [];
     _this.state = {
       progress: 0
     };

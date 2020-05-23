@@ -6,30 +6,35 @@ class Navbar extends React.Component {
         super(props);
         this.file = null;
         this.uploaded = 0;
+        this.chunks = [];
         this.state = {
             progress: 0
         };
     };
 
     select = (event) => {
+        this.uploaded = 0;
         this.file = event.target.files.item(0);
-        this.createChunks();
+        if (this.file !== null) {
+            this.createChunks();
+        }
     }
 
     createChunks = async () => {
         let size = 5 * 1024 * 1024, chunks = Math.ceil(this.file.size / size);
-        console.log('this.state.file.size: ', this.file.size);
+
         for (let i = 0; i < chunks; i++) {
             const chunk = this.file.slice(
                 i * size, Math.min(i * size + size, this.file.size), this.file.type
             );
-
             let formData = new FormData;
-            formData.set('is_last', i === chunks - 1);
+            formData.set('is_last', i + 1 == chunks);
             formData.set('file', chunk, `${this.file.name}.part`);
 
             await this.upload(formData).then(() => {
                 this.setState({ progress: (i + 1) / chunks });
+            }).catch(err => {
+                console.error(err);
             });
         }
     }
@@ -44,11 +49,6 @@ class Navbar extends React.Component {
                     'Content-Type': 'application/octet-stream'
                 },
                 onUploadProgress: event => {
-                    // console.log('event: ', event);
-                    // console.log('event.loaded: ', event.loaded);
-                    // this.uploaded += event.loaded;
-                    // this.setState({ progress: this.uploaded / this.file.size });
-                    // console.log(this.uploaded / this.file.size);
                 }
             };
             Axios(config).then(response => {
