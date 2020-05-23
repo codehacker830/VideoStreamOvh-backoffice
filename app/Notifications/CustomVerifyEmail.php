@@ -41,9 +41,11 @@ class CustomVerifyEmail extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->greeting('Hello!')
+                    ->line('Please click the button below to verify your email address.')
+                    ->action('Verify Email Address', url('/'))
+                    ->line('If you did not create an account, no further action is required.')
+                    ->line('Regards');
     }
 
     /**
