@@ -74074,7 +74074,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
         var config = {
           method: 'POST',
           data: formData,
-          url: 'api/upload',
+          url: 'api/video/upload',
           headers: {
             'Content-Type': 'application/octet-stream'
           },
@@ -74828,9 +74828,9 @@ var Register = /*#__PURE__*/function (_React$Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\NewStructure\27.Mix\Netflix-backend\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! F:\NewStructure\27.Mix\Netflix-backend\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! F:\NewStructure\27.Mix\Netflix-backend\resources\sass\custom.scss */"./resources/sass/custom.scss");
+__webpack_require__(/*! D:\0_OnGoingProject\VideoStream\0_Backend\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\0_OnGoingProject\VideoStream\0_Backend\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\0_OnGoingProject\VideoStream\0_Backend\resources\sass\custom.scss */"./resources/sass/custom.scss");
 
 
 /***/ })

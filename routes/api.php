@@ -22,6 +22,7 @@ Route::get('logout', 'AuthController@logout');
 Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail');
 Route::post('password/reset', 'ForgotPasswordController@reset');
 
+Route::post('video/upload', 'VideoController@upload');
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
@@ -49,7 +50,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('videos', 'VideoController@getAllVideos');
     Route::get('videos/category/{category_id}', 'VideoController@getVideosByCategory');
     Route::get('videos/title/{title}', 'VideoController@getVideosByName');
-    Route::post('video/upload', 'VideoController@upload');
+//    Route::post('video/upload', 'VideoController@upload');
     Route::put('video/{video_id}', 'VideoController@update');
 
 //    Route::post('upload', 'UploadController@upload');
