@@ -19,8 +19,8 @@ class UploadController extends Controller
             $name = basename($path, '.part');
             $finalPath = Storage::disk('local')->path("chunks/{$name}");
             File::move($path, $finalPath);
-            $test = $this->getThumbnail($finalPath);
-            return response()->json(['status' => $test]);
+//            $test = $this->getThumbnail($finalPath);
+//            return response()->json(['status' => $test]);
         }
 
         return response()->json(['uploaded' => true]);

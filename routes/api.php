@@ -50,7 +50,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('videos', 'VideoController@getAllVideos');
     Route::get('videos/category/{category_id}', 'VideoController@getVideosByCategory');
     Route::get('videos/title/{title}', 'VideoController@getVideosByName');
-    Route::post('video/upload', 'VideoController@upload');
+//    Route::post('video/upload', 'VideoController@upload');
     Route::put('video/{video_id}', 'VideoController@update');
 
 //    Route::post('upload', 'UploadController@upload');

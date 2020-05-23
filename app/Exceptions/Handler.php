@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,13 +51,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        if ($exception instanceof \Symfony\Component\HttpFoundation\File\Exception\FileException) {
+        if ($exception instanceof FileException) {
             // create a validator and validate to throw a new ValidationException
             return Validator::make($request->all(), [
                 'file' => 'max:10000000',
-                'your_file_input' => 'required|file|size: 20480',
+                'your_file_input' => 'required | file | size: 20480',
             ])->validate();
         }
-        // return parent::render($request, $exception);
     }
 }
