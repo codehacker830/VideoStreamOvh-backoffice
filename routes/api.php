@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Test database connection
 
 Route::post('login', 'AuthController@login');
 Route::post('register', 'AuthController@register');
@@ -22,15 +24,15 @@ Route::get('logout', 'AuthController@logout');
 Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail');
 Route::post('password/reset', 'ForgotPasswordController@reset');
 
-Route::post('video/upload', 'VideoController@upload');
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
 
-Route::group(['middleware' => ['jwt.verify']], function () {
+// Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('user', 'AuthController@getAuthenticatedUser');
-    Route::post('email/resend', 'VerificationController@resend');
-    Route::get('email/verify/{id}/{hash}', 'VerificationController@verify');
+
+    Route::get('email/resend', 'VerificationController@resendEmail');
+    Route::get('email/verify_email/{token}', 'VerificationController@verifyEmail');
 
     Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'ForgotPasswordController@reset');
@@ -50,8 +52,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('videos', 'VideoController@getAllVideos');
     Route::get('videos/category/{category_id}', 'VideoController@getVideosByCategory');
     Route::get('videos/title/{title}', 'VideoController@getVideosByName');
-//    Route::post('video/upload', 'VideoController@upload');
+    Route::post('video/upload', 'VideoController@upload');
     Route::put('video/{video_id}', 'VideoController@update');
-
-//    Route::post('upload', 'UploadController@upload');
-});
+// });
