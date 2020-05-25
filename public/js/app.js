@@ -74138,7 +74138,7 @@ var Navbar = /*#__PURE__*/function (_React$Component) {
         var config = {
           method: 'POST',
           data: formData,
-          url: 'api/video/upload',
+          url: '/api/video/upload',
           headers: {
             'Content-Type': 'application/octet-stream'
           },
@@ -74586,14 +74586,20 @@ var UploadVideo = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this);
 
-    _defineProperty(_assertThisInitialized(_this), "onHandleChange", function (ev, tag) {
-      if (tag === "description") {
-        _this.state.description = ev.target.value;
+    _defineProperty(_assertThisInitialized(_this), "onHandleChange", function (ev) {
+      if (ev.target.name === "description") {
+        _this.setState({
+          description: ev.target.value
+        });
       }
 
-      if (tag === "title") {
-        _this.state.title = ev.target.value;
+      if (ev.target.name === "title") {
+        _this.setState({
+          title: ev.target.value
+        });
       }
+
+      console.log(ev.target.name);
     });
 
     _this.state = {
@@ -74606,7 +74612,7 @@ var UploadVideo = /*#__PURE__*/function (_React$Component) {
   _createClass(UploadVideo, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _React$createElement;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container-fluid upload-details"
@@ -74665,28 +74671,21 @@ var UploadVideo = /*#__PURE__*/function (_React$Component) {
         type: "text",
         placeholder: "Please input video title",
         id: "e1",
+        name: "title",
         className: "form-control",
         value: this.state.title,
-        onChange: function onChange() {
-          return _this2.onHandleChange(ev, "title");
-        }
+        onChange: this.onHandleChange
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-lg-12"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "e2"
-      }, "About"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      }, "About"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", (_React$createElement = {
         rows: "3",
         id: "e2",
-        name: "e2",
-        className: "form-control",
-        placeholder: "Please write description",
-        value: this.state.description,
-        onChange: function onChange() {
-          return _this2.onHandleChange(ev, "description");
-        }
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        name: "e2"
+      }, _defineProperty(_React$createElement, "name", "description"), _defineProperty(_React$createElement, "className", "form-control"), _defineProperty(_React$createElement, "placeholder", "Please write description"), _defineProperty(_React$createElement, "value", this.state.description), _defineProperty(_React$createElement, "onChange", this.onHandleChange), _React$createElement))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-lg-3"
