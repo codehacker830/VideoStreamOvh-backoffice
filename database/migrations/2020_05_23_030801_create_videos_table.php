@@ -19,10 +19,11 @@ class CreateVideosTable extends Migration
             $table->unsignedBigInteger('category_id');
 //            $table->foreign('category_id')->references('id')->on('categories');
 //            $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->unsignedBigInteger('starts');
+
             $table->string('description')->nullable();
-            $table->string('cover')->nullable();
-            $table->string('source');
+            $table->string('cover')->default('/img/v1.png');
+            $table->string('source')->nullable();
+            $table->unsignedBigInteger('stars')->default(0);
             $table->unsignedBigInteger('views')->default(0);
             $table->unsignedFloat('rating')->default(0);;
             $table->timestamps();

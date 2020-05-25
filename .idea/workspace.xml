@@ -2,47 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="feca592a-7a9b-4dee-9863-94fa7478a95e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ReactController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Mails/ResetPasswordMail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Mails/VerificationMail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Category.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Role.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/UserActivation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Video.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_05_25_031304_create_user_activation_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeds/UserActivationSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/src/components/Footer.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/src/dashboard/UploadVideo.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/emails/resetPassword.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/emails/verification.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/email.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Category.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ForgotPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VerificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VerificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VideoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VideoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/JwtMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/JwtMiddleware.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notifications/CustomVerifyEmail.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Role.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Video.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_05_21_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_21_000000_create_users_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_05_23_030801_create_videos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_23_030801_create_videos_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/UserSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/UserSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/src/dashboard/Content.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/src/dashboard/Content.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/src/dashboard/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/src/dashboard/Sidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/src/dashboard/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/src/dashboard/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/src/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/src/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/src/pages/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/src/pages/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/src/pages/Register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/src/pages/Register.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/src/dashboard/UploadVideo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/src/dashboard/UploadVideo.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +170,7 @@
       <updated>1589948718028</updated>
       <workItem from="1589948719187" duration="12057000" />
       <workItem from="1590039189933" duration="933000" />
-      <workItem from="1590375392362" duration="20845000" />
+      <workItem from="1590375392362" duration="21558000" />
     </task>
     <servers />
   </component>

@@ -3,7 +3,19 @@ import React from 'react';
 class UploadVideo extends React.Component {
     constructor(props) {
         super();
+        this.state = {
+            title: "",
+            description: "",
 
+        }
+    }
+    onHandleChange = (ev, tag) => {
+        if (tag === "description") {
+            this.state.description = ev.target.value;
+        }
+        if (tag === "title") {
+            this.state.title = ev.target.value;
+        }
     }
     render() {
         return (
@@ -23,7 +35,7 @@ class UploadVideo extends React.Component {
                         <div className="osahan-progress">
                             <div className="progress">
                                 <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{width: "75%"}}></div>
+                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{ width: "75%" }}></div>
                             </div>
                             <div className="osahan-close">
                                 <a href="#"><i className="fas fa-times-circle"></i></a>
@@ -41,91 +53,41 @@ class UploadVideo extends React.Component {
                                 <div className="col-lg-12">
                                     <div className="form-group">
                                         <label htmlFor="e1">Video Title</label>
-                                        <input type="text"
-                                            defaultValue="Contrary to popular belief, Lorem Ipsum (2019) is not." id="e1"
-                                            className="form-control" />
+                                        <input
+                                            type="text"
+                                            placeholder="Please input video title" id="e1"
+                                            className="form-control"
+                                            value={this.state.title}
+                                            onChange={() => this.onHandleChange(ev, "title")}
+                                        />
                                     </div>
                                 </div>
                                 <div className="col-lg-12">
                                     <div className="form-group">
                                         <label htmlFor="e2">About</label>
-                                        <textarea rows="3" id="e2" name="e2" className="form-control">Description</textarea>
+                                        <textarea
+                                            rows="3"
+                                            id="e2" name="e2"
+                                            className="form-control"
+                                            placeholder="Please write description"
+                                            value={this.state.description}
+                                            onChange={() => this.onHandleChange(ev, "description")}
+                                        ></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-lg-3">
                                     <div className="form-group">
-                                        <label htmlFor="e3">Orientation</label>
-                                        <select id="e3" className="custom-select">
-                                            <option>Straight</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>
+                                        <label htmlFor="e7">Price</label>
+                                        <input type="number" placeholder="USD" id="e7" className="form-control" />
                                     </div>
                                 </div>
-                                <div className="col-lg-3">
+                                <div className="col-lg-9">
                                     <div className="form-group">
-                                        <label htmlFor="e4">Privacy Settings</label>
-                                        <select id="e4" className="custom-select">
-                                            <option>Public</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="col-lg-3">
-                                    <div className="form-group">
-                                        <label htmlFor="e5">Monetize</label>
-                                        <select id="e5" className="custom-select">
-                                            <option>Yes</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="col-lg-3">
-                                    <div className="form-group">
-                                        <label htmlFor="e6">License</label>
-                                        <select id="e6" className="custom-select">
-                                            <option>Standard</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-lg-5">
-                                    <div className="form-group">
-                                        <label htmlFor="e7">Tags (13 Tags Remaining)</label>
-                                        <input type="text" defaultValue="Gaming, PS4" id="e7" className="form-control" />
-                                    </div>
-                                </div>
-                                <div className="col-lg-4">
-                                    <div className="form-group">
-                                        <label htmlFor="e8">Cast (Optional)</label>
-                                        <input type="text" defaultValue="Nathan Drake," id="e8" className="form-control" />
-                                    </div>
-                                </div>
-                                <div className="col-lg-3">
-                                    <div className="form-group">
-                                        <label htmlFor="e9">Language in Video (Optional)</label>
-                                        <select id="e9" className="custom-select">
-                                            <option>English</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>
+                                        <label htmlFor="e8">Cover</label>
+                                        
+                                        <input type="file" id="cover_image" className="form-control" />
                                     </div>
                                 </div>
                             </div>
