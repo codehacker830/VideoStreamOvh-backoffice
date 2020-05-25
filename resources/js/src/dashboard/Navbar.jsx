@@ -44,7 +44,7 @@ class Navbar extends React.Component {
             const config = {
                 method: 'POST',
                 data: formData,
-                url: 'api/video/upload',
+                url: '/api/video/upload',
                 headers: {
                     'Content-Type': 'application/octet-stream'
                 },

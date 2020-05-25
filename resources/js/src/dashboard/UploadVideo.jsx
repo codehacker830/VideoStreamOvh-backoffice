@@ -9,13 +9,14 @@ class UploadVideo extends React.Component {
 
         }
     }
-    onHandleChange = (ev, tag) => {
-        if (tag === "description") {
-            this.state.description = ev.target.value;
+    onHandleChange = (ev) => {
+        if (ev.target.name === "description") {
+            this.setState({description : ev.target.value});
         }
-        if (tag === "title") {
-            this.state.title = ev.target.value;
+        if (ev.target.name === "title") {
+            this.setState({title : ev.target.value});
         }
+        console.log(ev.target.name)
     }
     render() {
         return (
@@ -55,10 +56,12 @@ class UploadVideo extends React.Component {
                                         <label htmlFor="e1">Video Title</label>
                                         <input
                                             type="text"
-                                            placeholder="Please input video title" id="e1"
+                                            placeholder="Please input video title" 
+                                            id="e1"
+                                            name="title"
                                             className="form-control"
                                             value={this.state.title}
-                                            onChange={() => this.onHandleChange(ev, "title")}
+                                            onChange={this.onHandleChange}
                                         />
                                     </div>
                                 </div>
@@ -68,10 +71,11 @@ class UploadVideo extends React.Component {
                                         <textarea
                                             rows="3"
                                             id="e2" name="e2"
+                                            name="description"
                                             className="form-control"
                                             placeholder="Please write description"
                                             value={this.state.description}
-                                            onChange={() => this.onHandleChange(ev, "description")}
+                                            onChange={this.onHandleChange}
                                         ></textarea>
                                     </div>
                                 </div>
