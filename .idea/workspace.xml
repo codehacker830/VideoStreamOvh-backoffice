@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="feca592a-7a9b-4dee-9863-94fa7478a95e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_05_23_030801_create_videos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_23_030801_create_videos_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/src/dashboard/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/src/dashboard/Navbar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/src/dashboard/UploadVideo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/src/dashboard/UploadVideo.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -170,7 +170,7 @@
       <updated>1589948718028</updated>
       <workItem from="1589948719187" duration="12057000" />
       <workItem from="1590039189933" duration="933000" />
-      <workItem from="1590375392362" duration="22176000" />
+      <workItem from="1590375392362" duration="22750000" />
     </task>
     <servers />
   </component>
