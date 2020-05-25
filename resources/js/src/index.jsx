@@ -14,7 +14,7 @@ function App() {
         // <Provider>
             <Router history={history}>
                 <Switch>
-                    <Redirect exact from="/" to="/login" />
+                    <Redirect exact from="/" to="/login" /> 
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <Route path="/dashboard" component={Dashboard} />

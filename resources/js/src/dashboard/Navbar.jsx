@@ -67,7 +67,7 @@ class Navbar extends React.Component {
                     <i className="fas fa-bars"></i>
                 </button> &nbsp;&nbsp;
                 <a className="navbar-brand mr-1" href="index.html">
-                    <img className="img-fluid" alt="" src="img/logo.png" />
+                    <img className="img-fluid" alt="" src="/img/logo.png" />
                 </a>
                 {/* <!-- Navbar Search --> */}
                 <form className="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-5 my-2 my-md-0 osahan-navbar-search">
@@ -116,7 +116,7 @@ class Navbar extends React.Component {
                     </li>
                     <li className="nav-item dropdown no-arrow osahan-right-navbar-user">
                         <a className="nav-link dropdown-toggle user-dropdown-link" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img alt="Avatar" src="img/user.png" />
+                            <img alt="Avatar" src="/img/user.png" />
                     Osahan
                     </a>
                         <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">

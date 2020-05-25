@@ -21,5 +21,11 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'role_id' => 1
         ]);
+        DB::table('users')->insert([
+            'name' => 'test',
+            'email' => 'test@email.com',
+            'password' => Hash::make('secret123'),
+            'role_id' => 1
+        ]);
     }
 }

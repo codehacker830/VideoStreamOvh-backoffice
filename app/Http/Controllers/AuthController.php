@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Mails\VerificationMail;
+use App\Models\UserActivation;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\UserNotDefinedException;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-    //
     public function login(Request $request)
     {
         $credentials = $request->only(['email', 'password']);
@@ -26,6 +27,7 @@ class AuthController extends Controller
         $user = User::where('email', $credentials['email'])->first();
         return response()->json(['status' => "success", 'user' => $user, 'token' => $token], 200);
     }
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -43,16 +45,25 @@ class AuthController extends Controller
         ]);
         $token = auth()->login($user);
         $status = "success";
+        $user_activation = UserActivation::create([
+            'user_id' => $user->id,
+            'token' => $token
+        ]);
+//        Mail::to($user->email)->send(new VerificationMail($token));
         return response()->json(compact('status', 'user', 'token'), 201);
     }
-    public function logout() {
+
+    public function logout()
+    {
         auth()->logout();
-        if(!auth()->check()) {
+        if (!auth()->check()) {
             return response()->json(['status' => 'success', 'message' => 'Token invalidation success'], 200);
         }
         return response()->json(['status' => 'failed', 'message' => 'Token invalidation failed'], 400);
     }
-    public function getAuthenticatedUser() {
+
+    public function getAuthenticatedUser()
+    {
         try {
             $user = auth()->userOrFail();
         } catch (UserNotDefinedException $e) {

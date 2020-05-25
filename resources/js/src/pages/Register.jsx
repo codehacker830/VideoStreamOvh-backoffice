@@ -8,7 +8,7 @@ class Register extends React.Component {
                 <div className="container-fluid pl-0 pr-0">
                     <div className="row no-gutters">
                         {/* <!-- Register Form --> */}
-                        <div className="col-md-5 p-5 bg-white full-height">
+                        <div className="col-md-12 p-5 bg-white full-height">
                             <div className="login-main-left">
                                 <div className="text-center mb-5 login-main-left-header pt-4">
                                     <img src="img/favicon.png" className="img-fluid" alt="LOGO" />
@@ -37,7 +37,7 @@ class Register extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <AuthSlider />
+                        {/* <AuthSlider /> */}
                     </div>
                 </div>
             </section>
