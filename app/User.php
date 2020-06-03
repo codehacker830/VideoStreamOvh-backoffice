@@ -17,7 +17,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'role_id','password',
+        'name', 'email', 'avatar', 'role_id', 'password',
     ];
 
     /**
@@ -38,7 +38,8 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function getJWTIdentifier() {
+    public function getJWTIdentifier()
+    {
         return $this->getKey();
     }
 
@@ -46,13 +47,19 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return [];
     }
-//
-//    public function role()
-//    {
-//        return $this->belongsTo('App\Models\Role','role_id');
-//    }
-//    public function user_activation() {
-//
-//        return $this->hasMany('App\Models\UserActivation', 'user_id');
-//    }
+
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role', 'role_id', 'id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany('App\Models\Payment', 'user_id', 'id');
+    }
+
+    public function user_activation()
+    {
+        return $this->hasMany('App\Models\UserActivation', 'user_id','id');
+    }
 }

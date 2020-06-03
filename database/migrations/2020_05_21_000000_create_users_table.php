@@ -17,9 +17,10 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('avatar')->default('https://via.placeholder.com/150x150');
             $table->timestamp('email_verified_at')->nullable();
-            $table->integer('role_id')->default(3);
-//            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->unsignedBigInteger('role_id')->default(3);
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
 //            $table->foreignId('role_id')->default(3)->constrained()->onDelete('cascade');
             $table->string('password');
             $table->rememberToken();

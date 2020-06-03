@@ -21,18 +21,17 @@ class JwtMiddleware extends BaseMiddleware
      */
     public function handle($request, Closure $next)
     {
-//        try {
-//            $user = JWTAuth::parseToken()->authenticate();
-//            return $next($request);
-//        } catch(Exception $e) {
-//            if($e instanceof TokenInvalidException) {
-//                return response()->json(['status' => 'failed', 'message' => 'Token_invalid_detected_by_jwt.verify_middleware']);
-//            } else if($e instanceof TokenExpiredException) {
-//                return response()->json(['status' => 'failed', 'message' => 'Token_expired_detected_by_jwt.verify_middleware']);
-//            } else {
-//                return response()->json(['status' => 'failed', 'message' => 'Token_absent_detected_by_jwt.verify_middleware']);
-//            }
-//        }
-
+        try {
+            $user = JWTAuth::parseToken()->authenticate();
+            return $next($request);
+        } catch(Exception $e) {
+            if($e instanceof TokenInvalidException) {
+                return response()->json(['error' => 'Token_invalid_detected_by_jwt.verify_middleware'], 401);
+            } else if($e instanceof TokenExpiredException) {
+                return response()->json(['error' => 'Token_expired_detected_by_jwt.verify_middleware'], 401);
+            } else {
+                return response()->json(['error' => 'Token_absent_detected_by_jwt.verify_middleware'], 401);
+            }
+        }
     }
 }
