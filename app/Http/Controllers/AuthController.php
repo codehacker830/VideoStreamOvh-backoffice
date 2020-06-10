@@ -35,14 +35,14 @@ class AuthController extends Controller
         $credentials = $request->only(['email', 'password']);
         try {
             if (!$token = auth()->attempt($credentials)) {
-                return response()->json(['status'=>'failed','error' => 'Invalid credentials'], 401);
+                return response()->json(['error' => 'Invalid credentials'], 401);
             }
         } catch (JWTException $e) {
-            return response()->json(['status'=>'failed','error' => 'Invalid credentials'], 401);
+            return response()->json(['error' => 'Invalid credentials'], 401);
         }
         $user = User::where('email', $credentials['email'])->first();
-        if($user->role->name != 'admin' && $user->role->name != 'content') return response()->json(['status'=>'failed', 'error' => "Your role has no permission to access admin dashboard"],403);
-        return response()->json(['status'=>'success', 'user' => $user, 'token' => $token]);
+        if($user->role->name != 'admin' && $user->role->name != 'content') return response()->json(['error' => "Your role has no permission to access admin dashboard"],403);
+        return response()->json(['user' => $user, 'token' => $token]);
     }
 
     public function register(Request $request)
@@ -74,13 +74,13 @@ class AuthController extends Controller
         try {
             $user = auth()->userOrFail();
         } catch (UserNotDefinedException $e) {
-            return response()->json(['status' => 'success', 'message'=>'Token was already invalidated']);
+            return response()->json(['message'=>'Token was already invalidated']);
         }
         auth()->logout();
         if (!auth()->check()) {
-            return response()->json(['status' => 'success', 'message' => 'Token invalidation was done successfully']);
+            return response()->json(['message' => 'Token invalidation was done successfully']);
         }
-        return response()->json(['status' => 'success', 'error' => 'token invalidation failed']);
+        return response()->json(['error' => 'token invalidation failed'],400);
     }
 
     public function getAuthenticatedUser()
