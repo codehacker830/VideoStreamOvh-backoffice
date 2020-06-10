@@ -21,7 +21,7 @@ class StateController extends Controller
         $totalUsers = User::all()->count();
 
         $videos = Video::where('id', "!=", null)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('views', 'desc')
             ->limit(5)
             ->get();
         return response()->json([
@@ -31,6 +31,14 @@ class StateController extends Controller
             'recent_customers' => $recentUsers,
             'trending_videos' => $videos
         ]);
-
+    }
+    public function getTrending() {
+        $videos = Video::where('id', "!=", null)
+            ->orderBy('views', 'desc')
+            ->limit(8)
+            ->get();
+        return response()->json([
+            'videos' => $videos
+        ]);
     }
 }

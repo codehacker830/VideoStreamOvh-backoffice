@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 // phpinfo();
+//Auth::routes(['verify' => true]);
 
 Route::get('/{path?}', [
     'uses' => 'ReactController@showReact',
@@ -21,5 +22,4 @@ Route::get('/{path?}', [
     'where' => ['path' => '.*']
 ]);
 
-//Auth::routes(['verify' => true]);
 //Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');

@@ -20,13 +20,14 @@ class AuthController extends Controller
         $credentials = $request->only(['email', 'password']);
         try {
             if (!$token = auth()->attempt($credentials)) {
-                return response()->json(['status'=>'failed','error' => 'Invalid credentials']);
+                return response()->json(['error' => 'Invalid credentials'], 401);
             }
         } catch (JWTException $e) {
-            return response()->json(['status'=>'failed','error' => 'Invalid credentials']);
+            return response()->json(['error' => 'Invalid credentials'],401);
         }
         $user = User::where('email', $credentials['email'])->first();
-        return response()->json(['status' => "success", 'user' => $user, 'token' => $token], 200);
+        $user->role;
+        return response()->json(['user' => $user, 'token' => $token]);
     }
 
     public function adminLogin(Request $request)
@@ -46,26 +47,26 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required | string | max:255',
-            'email' => 'required | string | max:255 | unique:users',
-            'password' => 'required | string | min:6 | confirmed'
-        ]);
-        if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
+
+        $name = $request->get('name');
+        $email = $request->get('email');
+        $password = $request->get('password');
+        $old = User::where('email', $email)->first();
+        if($old) {
+            return response()->json(['error' => 'Email already exist'], 403);
         }
         $user = User::create([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password'))
+            'name' => $name ,
+            'email' => $email,
+            'password' => Hash::make($password)
         ]);
         $token = auth()->login($user);
         $user_activation = UserActivation::create([
             'user_id' => $user->id,
             'token' => $token
         ]);
-        Mail::to($user->email)->send(new VerificationMail($token));
-        return response()->json(['status'=>'success', 'user'=>$user, 'token' => $token], 201);
+//        Mail::to($user->email)->send(new VerificationMail($token));
+        return response()->json(['user'=>$user, 'token' => $token]);
     }
 
     public function logout()
@@ -87,9 +88,9 @@ class AuthController extends Controller
         try {
             $user = auth()->userOrFail();
         } catch (UserNotDefinedException $e) {
-            return response()->json(['status'=>'failed', 'error' => 'Please login again']);
+            return response()->json(['error' => 'Please login again'], 404);
         }
-        return response()->json(['status'=>'success', 'user' => $user]);
+        return response()->json(['user' => $user]);
     }
 
 }

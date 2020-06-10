@@ -12,8 +12,11 @@ class UserActivationSeeder extends Seeder
      */
     public function run()
     {
-//        DB::table('user_activation')->insert([
-//            'user_id' => 1,
-//        ]);
+        DB::table('user_activation')->insert([
+            'user_id' => 4,
+            'token' => '123',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

@@ -22,14 +22,14 @@ class VerificationController extends Controller
             return response()->json(['error' => 'Your account was not found.'], 404);
         }
         if ($user->hasVerifiedEmail()) {
-            return response()->json(['status' => 'success', 'message' => 'Email already verified'], 204);
+            return response()->json(['message' => 'Your email was already verified']);
         }
         $token = auth()->login($user);
         $user_activation = UserActivation::where('user_id', '=', $user->id)->first();
         $user_activation->token = $token;
         $user_activation->save();
-//        Mail::to($user->email)->send(new VerificationMail($token));
-        return response()->json(['status' => 'success', 'message' => 'Verification email was sent'], 202);
+        Mail::to($user->email)->send(new VerificationMail($token));
+        return response()->json(['message' => 'Verification link was sent into your email']);
     }
 
     public function verifyEmail(Request $request)
@@ -42,12 +42,12 @@ class VerificationController extends Controller
             if($user)
             {
                 $user->markEmailAsVerified();
-                return response()->json(['status' => 'success', 'message' => 'Email Verified Successfully!'], 201);
+                return response()->json(['message' => 'Your email was verified successfully!']);
             }
-            else{
-                return response()->json(['status' => 'failed', 'error' => "Your email address was not registered yet"],301);
+            else {
+                return response()->json(['error' => "Your email address was not registered yet"], 400);
             }
         }
-        return response()->json(['status' => 'failed', 'error' => "Please resend verification email"],301);
+        return response()->json(['error' => "Your email address was not registered yet"],404);
     }
 }

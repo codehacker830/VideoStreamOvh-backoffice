@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Video;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -23,6 +25,14 @@ class VideoController extends Controller
         return $randomString;
     }
 
+    public function getVideo(Request $request)
+    {
+        $video_id = $request->route('video_id');
+        $video = Video::find($video_id);
+        $video->category;
+        return response()->json(compact('video'));
+    }
+
     public function getAllVideos()
     {
         $videos = Video::all();
@@ -32,23 +42,23 @@ class VideoController extends Controller
 
     public function videoUpload(Request $request)
     {
-            $file = $request->file('file');
-            $oldFileName = $file->getClientOriginalName();
-            $realpath = Storage::disk('local')->path("chunks\\" . $oldFileName);
-            $path = Storage::disk('local')->put("chunks\\" . $oldFileName, 'Contents');
+        $file = $request->file('file');
+        $oldFileName = $file->getClientOriginalName();
+        $realpath = Storage::disk('local')->path("chunks\\" . $oldFileName);
+        $path = Storage::disk('local')->put("chunks\\" . $oldFileName, 'Contents');
 
-            File::append($path, $file->get());
-            if ($request->has('is_last') && $request->boolean('is_last')) {
-                $name = basename($realpath, '.part');
-                $randomString = $this->getRandomName(20);
-                $fileName = $randomString . $name;
-                File::move($path, Storage::disk('public')->path("videos/$fileName"));
-                File::delete($realpath);
-            }
-            $video = Video::create([
-                "source" => asset("/storage/videos/$fileName")
-            ]);
-            return response()->json(['uploaded' => true, 'id' => $video->id]);
+        File::append($path, $file->get());
+        if ($request->has('is_last') && $request->boolean('is_last')) {
+            $name = basename($realpath, '.part');
+            $randomString = $this->getRandomName(20);
+            $fileName = $randomString . $name;
+            File::move($path, Storage::disk('public')->path("videos/$fileName"));
+            File::delete($realpath);
+        }
+        $video = Video::create([
+            "source" => asset("/storage/videos/$fileName")
+        ]);
+        return response()->json(['uploaded' => true, 'id' => $video->id]);
     }
 
     public function createContent(Request $request)
@@ -91,7 +101,58 @@ class VideoController extends Controller
     public function getVideosByName(Request $request)
     {
         $title = $request->route('title');
-        $videos = Video::where('title', $title)->get();
+        $videos = Video::where('title', 'LIKE', '%' . $title . '%')->get();
         return response()->json(compact('videos'), 200);
+    }
+
+    public function getMyCartList()
+    {
+        $user = auth()->user();
+        $myCarts = $user->carts;
+        $list = array();
+        foreach ($myCarts as $cartItem) {
+            $id = $cartItem->id;
+            $video = Video::find($cartItem->video_id);
+            array_push($list, $video);
+        }
+        return response()->json(['list' => $list]);
+    }
+
+    public function addToCart(Request $request)
+    {
+        $video_id = $request->get('video_id');
+        $user = auth()->user();
+        if (Cart::where('user_id', $user->id)->where('video_id', $video_id)->count() > 0) {
+            return response()->json(['error' => 'you have item already in cart'], 400);
+        }
+        Cart::create([
+            'user_id' => $user->id,
+            'video_id' => $video_id
+        ]);
+        $myCarts = $user->carts;
+        $list = array();
+        foreach ($myCarts as $cartItem) {
+            $id = $cartItem->id;
+            $video = Video::find($cartItem->video_id);
+            array_push($list, $video);
+        }
+        return response()->json(['list' => $list]);
+
+    }
+
+    public function removeFromCart(Request $request)
+    {
+        $video_id = $request->get('video_id');
+        $user = auth()->user();
+        $items = Cart::where('user_id', $user->id)->where('video_id', $video_id)->get();
+        foreach ($items as $item) $item->delete();
+        $myCarts = $user->carts;
+        $list = array();
+        foreach ($myCarts as $cartItem) {
+            $id = $cartItem->id;
+            $video = Video::find($cartItem->video_id);
+            array_push($list, $video);
+        }
+        return response()->json(['list' => $list]);
     }
 }
