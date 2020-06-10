@@ -17,7 +17,7 @@
             <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 <tbody>
                 <tr>
-                    <td> <a href="http://localhost:3000/password-reset-form/{{$token}}">Reset Password</a> </td>
+                    <td> <a href="https://www.videostream.ovh/password-reset-form/{{$token}}">Reset Password</a> </td>
                 </tr>
                 </tbody>
             </table>
