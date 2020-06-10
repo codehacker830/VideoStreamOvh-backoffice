@@ -51,7 +51,8 @@ class VideoController extends Controller
         if ($request->has('is_last') && $request->boolean('is_last')) {
             $name = basename($realpath, '.part');
             $randomString = $this->getRandomName(20);
-            $fileName = $randomString . $name;
+            $ext = pathinfo($name, PATHINFO_EXTENSION);
+            $fileName = $randomString . "." . $ext;
             File::move($path, Storage::disk('public')->path("videos/$fileName"));
             File::delete($realpath);
         }

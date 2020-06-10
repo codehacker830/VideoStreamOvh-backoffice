@@ -2,37 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="feca592a-7a9b-4dee-9863-94fa7478a95e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/precache-manifest.7e86e07dffbf3745818c430d3e07efd1.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/10.b477337e.chunk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/10.b477337e.chunk.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/3.a48bb21b.chunk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/3.a48bb21b.chunk.js.LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/3.a48bb21b.chunk.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/4.aca0c2ab.chunk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/4.aca0c2ab.chunk.js.LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/4.aca0c2ab.chunk.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/5.e31e7698.chunk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/5.e31e7698.chunk.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/6.9a6c92c4.chunk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/6.9a6c92c4.chunk.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/7.7aedbf0b.chunk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/7.7aedbf0b.chunk.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/8.ab8348b3.chunk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/8.ab8348b3.chunk.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/9.31dc85ba.chunk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/9.31dc85ba.chunk.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/main.c637db86.chunk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/main.c637db86.chunk.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/runtime-main.fffbb62d.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/js/runtime-main.fffbb62d.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/precache-manifest.0f5248ad6be73596afd036b962ca0024.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/service-worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UploadController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VideoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VideoController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +183,7 @@
       <workItem from="1591352612155" duration="12031000" />
       <workItem from="1591582929428" duration="38908000" />
       <workItem from="1591716384249" duration="3018000" />
-      <workItem from="1591784280014" duration="13666000" />
+      <workItem from="1591784280014" duration="16730000" />
     </task>
     <servers />
   </component>
@@ -230,10 +202,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="529" y="33" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/1920.0.1366.728@0.0.1920.1040" timestamp="1590396225393" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1591119302822">
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1591816506549">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1366.728@0.0.1920.1040" timestamp="1591119302822" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1366.728@0.0.1920.1040" timestamp="1591816506549" />
     <state x="2699" y="178" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1591002102610">
       <screen x="1920" y="0" width="1366" height="728" />
     </state>
