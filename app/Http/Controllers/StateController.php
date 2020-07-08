@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use App\Models\Video;
+use App\Models\Vote;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -33,10 +34,29 @@ class StateController extends Controller
         ]);
     }
     public function getTrending() {
+//        $user = auth()->user();
+
         $videos = Video::where('id', "!=", null)
             ->orderBy('views', 'desc')
             ->limit(8)
             ->get();
+        foreach ($videos as $video) {
+            $video->category;
+
+//            if($user) {
+//                $vote = Vote::where([
+//                    ['user_id', $user->id],
+//                    ['video_id', $video->id]
+//                ])->first();
+//                if($vote) {
+//                    $video->vote = $vote->vote;
+//                } else {
+//                  $video->vote = null;
+//                }
+//            } else {
+//                $video->vote = null;
+//            }
+        }
         return response()->json([
             'videos' => $videos
         ]);

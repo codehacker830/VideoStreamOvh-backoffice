@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Video;
+use App\Models\Vote;
+use App\Models\Watching;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -27,9 +29,29 @@ class VideoController extends Controller
 
     public function getVideo(Request $request)
     {
+        $user = auth()->user();
         $video_id = $request->route('video_id');
         $video = Video::find($video_id);
         $video->category;
+
+        $vote = Vote::where([
+            ['user_id', $user->id],
+            ['video_id', $video->id]
+        ])->first();
+        if ($vote) {
+            $video->vote = $vote->vote;
+        } else {
+            $video->vote = null;
+        }
+        $watching = Watching::where([
+            ['user_id', $user->id],
+            ['video_id', $video->id]
+        ])->first();
+        if($watching) {
+            $video->watched_time = $watching->watched_time;
+        } else {
+            $video->watched_time = null;
+        }
         return response()->json(compact('video'));
     }
 
@@ -92,6 +114,60 @@ class VideoController extends Controller
         return response()->json(['status' => 'success', 'videos' => $videos]);
     }
 
+    public function upVote(Request $request)
+    {
+        $user = auth()->user();
+        $video_id = $request->route('video_id');
+        $vote = Vote::where([
+            ['user_id', $user->id],
+            ['video_id', $video_id]
+        ])->first();
+        if ($vote) {
+            $vote->vote = "up";
+            $vote->save();
+        } else {
+            $newVote = new Vote();
+            $newVote->user_id = $user->id;
+            $newVote->video_id = $video_id;
+            $newVote->vote = "up";
+            $newVote->save();
+        }
+        return response()->json(['status' => 'success']);
+    }
+
+    public function downVote(Request $request)
+    {
+        $user = auth()->user();
+        $video_id = $request->route('video_id');
+        $vote = Vote::where([
+            ['user_id', $user->id],
+            ['video_id', $video_id]
+        ])->first();
+        if ($vote) {
+            $vote->vote = "down";
+            $vote->save();
+        } else {
+            $newVote = new Vote();
+            $newVote->user_id = $user->id;
+            $newVote->video_id = $video_id;
+            $newVote->vote = "down";
+            $newVote->save();
+        }
+        return response()->json(['status' => 'success']);
+    }
+
+    public function removeVote(Request $request)
+    {
+        $user = auth()->user();
+        $video_id = $request->route('video_id');
+        $votes = Vote::where([
+            ['user_id', $user->id],
+            ['video_id', $video_id]
+        ])->delete();
+
+        return response()->json(['status' => 'success']);
+    }
+
     public function getVideosByCategory(Request $request)
     {
         $category_id = $request->route('category_id');
@@ -111,12 +187,51 @@ class VideoController extends Controller
         $user = auth()->user();
         $myCarts = $user->carts;
         $list = array();
-        foreach ($myCarts as $cartItem) {
-            $id = $cartItem->id;
-            $video = Video::find($cartItem->video_id);
+        foreach ($myCarts as $record) {
+            $video = Video::find($record->video_id);
+            $video->category;
+
+//            $vote = Vote::where([
+//                ['user_id', $user->id],
+//                ['video_id', $video->id]
+//            ])->first();
+//            if($vote) {
+//                $video->vote = $vote->vote;
+//            } else {
+//                $video->vote = null;
+//            }
+
             array_push($list, $video);
         }
         return response()->json(['list' => $list]);
+    }
+
+    public function getWatching()
+    {
+        $user = auth()->user();
+
+        $records = Watching::where('user_id', $user->id)->get();
+        $list = array();
+        foreach ($records as $record) {
+            $video = Video::find($record->video_id);
+
+            $video->category;
+            $video->watched_time = $record->watched_time;
+
+//            $vote = Vote::where([
+//                ['user_id', $user->id],
+//                ['video_id', $video->id]
+//            ])->first();
+//            if($vote) {
+//                $video->vote = $vote->vote;
+//            } else {
+//                $video->vote = null;
+//            }
+
+            array_push($list, $video);
+        }
+
+        return response()->json(['videos' => $list]);
     }
 
     public function addToCart(Request $request)

@@ -53,8 +53,13 @@ Route::post('password/reset', 'ForgotPasswordController@reset');
     Route::put('video/{video_id}', 'VideoController@update');
     Route::delete('video/{video_id}', 'VideoController@delete');
     Route::get('cart', 'VideoController@getMyCartList');
+    Route::get('watching', 'VideoController@getWatching');
     Route::post('cart', 'VideoController@addToCart');
     Route::post('cart/delete', 'VideoController@removeFromCart');
+
+    Route::get('upvote/{video_id}', 'VideoController@upVote');
+    Route::get('downvote/{video_id}', 'VideoController@downVote');
+    Route::get('removevote/{video_id}', 'VideoController@removeVote');
 
     Route::get('state', 'StateController@getState');
     Route::get('state/trending', 'StateController@getTrending');
