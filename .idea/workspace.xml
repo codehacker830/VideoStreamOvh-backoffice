@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="feca592a-7a9b-4dee-9863-94fa7478a95e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VideoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VideoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_05_23_030801_create_videos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_05_23_030801_create_videos_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_07_07_161303_create_watchings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_07_07_161303_create_watchings_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/WatchingSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/WatchingSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/emails/verification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/verification.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +189,7 @@
       <workItem from="1592060915934" duration="6482000" />
       <workItem from="1592801061591" duration="24000" />
       <workItem from="1594136797969" duration="23583000" />
-      <workItem from="1594667016359" duration="5672000" />
+      <workItem from="1594667016359" duration="10364000" />
     </task>
     <servers />
   </component>
