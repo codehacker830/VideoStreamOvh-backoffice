@@ -28,7 +28,7 @@ Route::get('email/verify/{token}', 'VerificationController@verifyEmail');
 Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail');
 Route::post('password/reset', 'ForgotPasswordController@reset');
 
-//Route::group(['middleware' => ['jwt.verify']], function () {
+Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('me', 'AuthController@getAuthenticatedUser');
 
     Route::get('users', 'UserController@getUsers');
@@ -67,8 +67,7 @@ Route::post('password/reset', 'ForgotPasswordController@reset');
 
     Route::get('state', 'StateController@getState');
     Route::get('state/trending', 'StateController@getTrending');
-
-//});
+});
 
 
 

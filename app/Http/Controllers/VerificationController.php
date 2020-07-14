@@ -21,9 +21,9 @@ class VerificationController extends Controller
         if(!$user) {
             return response()->json(['error' => 'Your account was not found.'], 404);
         }
-        if ($user->hasVerifiedEmail()) {
-            return response()->json(['message' => 'Your email was already verified']);
-        }
+//        if ($user->hasVerifiedEmail()) {
+//            return response()->json(['message' => 'Your email was already verified']);
+//        }
         $token = auth()->login($user);
         $user_activation = UserActivation::where('user_id', '=', $user->id)->first();
         $user_activation->token = $token;
