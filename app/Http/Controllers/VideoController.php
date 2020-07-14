@@ -271,4 +271,47 @@ class VideoController extends Controller
         }
         return response()->json(['list' => $list]);
     }
+    public function watchedTime(Request $request) {
+        $user = auth()->user();
+        $video_id = $request->route('video_id');
+        $watching = Watching::where([
+            ['user_id', $user->id],
+            ['video_id', $video_id]
+        ])->first();
+        if($watching) return response()->json(['watched_time' => $watching->watched_time]);
+        else return response()->json(['watched_time' => 0]);
+    }
+    public function updateDuration(Request $request) {
+        $user = auth()->user();
+        $duration = $request->get('duration');
+        $video_id = $request->get('video_id');
+        $video = Video::find($video_id);
+        $video->duration = $duration;
+        $video->save();
+    }
+    public function updateProgress(Request $request) {
+        $user = auth()->user();
+        $video_id = $request->get('video_id');
+        $watched_time = $request->get('watched_time');
+        $watching = Watching::where([
+            ['user_id', $user->id],
+            ['video_id', $video_id]
+        ])->first();
+        if($watching) {
+            if($watching->watched_time < $watched_time) {
+                $watching->watched_time = $watched_time;
+                $watching->save();
+                return response()->json(['message' => 'The watched_time was updated successfully !']);
+            } else {
+                return response()->json(['message' => 'Database watched_time is greater than new one']);
+            }
+        } else {
+            $newWatching = new Watching();
+            $newWatching->user_id = $user->id;
+            $newWatching->video_id = $video_id;
+            $newWatching->watched_time = $watched_time;
+            $newWatching->save();
+        }
+
+    }
 }

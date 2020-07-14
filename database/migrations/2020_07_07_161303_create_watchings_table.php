@@ -17,7 +17,7 @@ class CreateWatchingsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('video_id');
-            $table->unsignedFloat('watched_time');
+            $table->unsignedFloat('watched_time')->default(0);
             $table->timestamps();
         });
     }

@@ -26,7 +26,7 @@ class CreateVideosTable extends Migration
             $table->string('bob_background')->default('https://via.placeholder.com/720x394');
             $table->string('jawbone_title_logo')->default('https://via.placeholder.com/550x124');
             $table->string('ptrack_content_image')->default('https://via.placeholder.com/848x477');
-            $table->unsignedFloat('duration')->default(100);
+            $table->unsignedDouble('duration')->default(60 * 60);
             $table->string('source')->nullable();
             $table->unsignedFloat('rating')->default(5);
             $table->unsignedInteger('price')->nullable();

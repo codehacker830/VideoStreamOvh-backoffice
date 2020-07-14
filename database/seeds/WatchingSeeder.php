@@ -14,7 +14,7 @@ class WatchingSeeder extends Seeder
         DB::table('watchings')->insert([
             'user_id' => 2,
             'video_id' => 3,
-            'watched_time' => 49,
+            'watched_time' => 20.5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

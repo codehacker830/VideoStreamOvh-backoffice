@@ -61,6 +61,10 @@ Route::post('password/reset', 'ForgotPasswordController@reset');
     Route::get('downvote/{video_id}', 'VideoController@downVote');
     Route::get('removevote/{video_id}', 'VideoController@removeVote');
 
+    Route::get('watched-time/{video_id}','VideoController@watchedTime');
+    Route::post('video-duration', 'VideoController@updateDuration');
+    Route::post('progress-update', 'VideoController@updateProgress');
+
     Route::get('state', 'StateController@getState');
     Route::get('state/trending', 'StateController@getTrending');
 
