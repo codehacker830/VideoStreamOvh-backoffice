@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Mails\VerificationMail;
+use App\Models\Plan;
 use App\Models\UserActivation;
 use App\User;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -53,7 +53,7 @@ class AuthController extends Controller
         $password = $request->get('password');
         $old = User::where('email', $email)->first();
         if($old) {
-            return response()->json(['error' => 'Email already exist'], 403);
+            return response()->json(['error' => 'Email address was already taken'], 422);
         }
         $user = User::create([
             'name' => $name ,
@@ -92,5 +92,4 @@ class AuthController extends Controller
         }
         return response()->json(['user' => $user]);
     }
-
 }

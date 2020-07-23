@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             UserActivationSeeder::class,
             WatchingSeeder::class,
             VoteSeeder::class,
-            CartSeeder::class
+            CartSeeder::class,
+            PlanSeeder::class
         ]);
     }
 }

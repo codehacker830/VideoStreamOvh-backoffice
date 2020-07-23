@@ -23,6 +23,9 @@ class CreateUsersTable extends Migration
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
 //            $table->foreignId('role_id')->default(3)->constrained()->onDelete('cascade');
             $table->string('password');
+            $table->unsignedBigInteger('plan_id')->default(null)->nullable();
+            $table->string('stripe_price_id')->nullable();
+            $table->string('paypal_subscription_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
