@@ -23,7 +23,7 @@ class AuthController extends Controller
                 return response()->json(['error' => 'Invalid credentials'], 401);
             }
         } catch (JWTException $e) {
-            return response()->json(['error' => 'Invalid credentials'],401);
+            return response()->json(['error' => 'Invalid credentials'], 401);
         }
         $user = User::where('email', $credentials['email'])->first();
         $user->role;
@@ -41,7 +41,7 @@ class AuthController extends Controller
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
         $user = User::where('email', $credentials['email'])->first();
-        if($user->role->name != 'admin' && $user->role->name != 'content') return response()->json(['error' => "Your role has no permission to access admin dashboard"],403);
+        if ($user->role->name != 'admin' && $user->role->name != 'content') return response()->json(['error' => "Your role has no permission to access admin dashboard"], 403);
         return response()->json(['user' => $user, 'token' => $token]);
     }
 
@@ -52,11 +52,11 @@ class AuthController extends Controller
         $email = $request->get('email');
         $password = $request->get('password');
         $old = User::where('email', $email)->first();
-        if($old) {
+        if ($old) {
             return response()->json(['error' => 'Email address was already taken'], 422);
         }
         $user = User::create([
-            'name' => $name ,
+            'name' => $name,
             'email' => $email,
             'password' => Hash::make($password)
         ]);
@@ -66,7 +66,7 @@ class AuthController extends Controller
             'token' => $token
         ]);
 //        Mail::to($user->email)->send(new VerificationMail($token));
-        return response()->json(['user'=>$user, 'token' => $token]);
+        return response()->json(['user' => $user, 'token' => $token]);
     }
 
     public function logout()
@@ -74,13 +74,13 @@ class AuthController extends Controller
         try {
             $user = auth()->userOrFail();
         } catch (UserNotDefinedException $e) {
-            return response()->json(['message'=>'Token was already invalidated']);
+            return response()->json(['message' => 'Token was already invalidated']);
         }
         auth()->logout();
         if (!auth()->check()) {
             return response()->json(['message' => 'Token invalidation was done successfully']);
         }
-        return response()->json(['error' => 'token invalidation failed'],400);
+        return response()->json(['error' => 'token invalidation failed'], 400);
     }
 
     public function getAuthenticatedUser()
@@ -91,5 +91,21 @@ class AuthController extends Controller
             return response()->json(['error' => 'Please login again'], 404);
         }
         return response()->json(['user' => $user]);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $user = auth()->user();
+        $currentPass = $request->get('currentPass');
+        $newPass = $request->get('newPass');
+
+        if (Hash::check($currentPass, $user->password)) {
+            $user->password = Hash::make($newPass);
+            $user->save();
+            $token = auth()->login($user);
+            return response()->json(['user' => $user, 'token' => $token]);
+        } else {
+            return response()->json(['error' => 'Password is not matched'],'404');
+        }
     }
 }

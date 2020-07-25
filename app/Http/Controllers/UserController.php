@@ -15,7 +15,6 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class UserController extends Controller
 {
-    //
     public function getUsers()
     {
 //        $user = auth()->user();
@@ -24,14 +23,14 @@ class UserController extends Controller
         foreach ($users as $user) {
             $user->role;
         }
-        return response()->json(['status'=>'success','users' => $users]);
+        return response()->json(['status' => 'success', 'users' => $users]);
     }
 
     public function getUser(Request $request)
     {
         $user_id = $request->route('user_id');
         $user = User::find($user_id);
-        return response()->json(compact(('user')),200);
+        return response()->json(compact(('user')), 200);
     }
 
     public function forceCreate(Request $request)

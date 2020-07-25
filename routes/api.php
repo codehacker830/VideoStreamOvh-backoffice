@@ -30,10 +30,12 @@ Route::post('password/reset', 'ForgotPasswordController@reset');
 
 Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('me', 'AuthController@getAuthenticatedUser');
+    Route::post('change-password', 'AuthController@changePassword');
+
     Route::get('plans', 'PaymentController@getPlans');
     Route::post('paypal-subscribe', 'PaymentController@paypalSubcribe');
     Route::post('stripe-subscribe', 'PaymentController@stripeSubcribe');
-
+    Route::get('unsubscribe', 'PaymentController@unsubscribe');
 
     Route::get('users', 'UserController@getUsers');
     Route::get('user/{user_id}', 'UserController@getUser');
